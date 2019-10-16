@@ -1,0 +1,117 @@
+﻿<div class="wrapper">
+    <div>
+        <h5 id="welcome__display">
+            Manage Your Subjects
+        </h5>
+    </div>
+    <div id="formContent">
+
+        <div class="fadeIn first">
+            <img src="~/images/login-shield.png" id="icon" alt="User Icon" /><br />
+            <input type="radio" id="isAdmin" class="fadeIn first" value="false" /><span class="fadeIn second">Check if Admin</span><br>
+        </div>
+        <form>
+            <input type="text" id="subject" class="fadeIn second" name="login" placeholder="add/ update/ delete subject">
+        </form>
+        <div id="formFooter">
+            <input type="button" onclick="createBtn()" value="Create" />
+            <input type="button" onclick="updateBtn()" value="Update" />
+            <input type="button" onclick="deleteBtn()" value="Delete" />
+        </div>
+    </div>
+</div>
+<script>
+    function createBtn() {
+        var isSelected = $('#isAdmin').is(':checked');
+        alert(isSelected);
+        var details = {
+            Username: $('#userLogin').val(),
+            Password: $('#password').val(),
+            CRUD: 1,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(data)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+    function updateBtn() {
+        var isSelected = $('#isAdmin').is(':checked');
+        alert(isSelected);
+        var details = {
+            Username: $('#userLogin').val(),
+            Password: $('#password').val(),
+            CRUD: 2,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(data)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+    function deleteBtn() {
+        var isSelected = $('#isAdmin').is(':checked');
+        alert(isSelected);
+        var details = {
+            Username: $('#userLogin').val(),
+            Password: $('#password').val(),
+            CRUD: 3,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(data)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+</script>

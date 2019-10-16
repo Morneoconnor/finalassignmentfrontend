@@ -1,0 +1,80 @@
+﻿@model CPUTUserManager.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Content";
+}
+
+<div class="wrapper">
+    <div style="display:block; width:auto">
+        
+        <h2 id="welcome__display">Manager your ....</h2><br />
+        <div style="float:left;">
+            <button class="btn-primary" style="background-color:#808080" id="password_btn" onclick="passwordBtn()"><span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="sospassword_btn" onclick="sospasswordBtn()">SOS Password<span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="personal_btn" onclick="personalDetailBtn()">Personal Details<span class="glyphicon glyphicon-refresh"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="subjects_btn" onclick="subjectBtn()">Subjects<span class="glyphicon glyphicon-refresh"></span></button>  
+            <button class="btn-primary" style="background-color:#808080" id="course_btn" onclick="courseBtn()">Course<span class="glyphicon glyphicon-refresh"></span></button> 
+            <button class="btn-primary" style="background-color:#808080" id="emergency_btn" onclick="emergencyBtn()">Emergency Contact<span class="glyphicon glyphicon-refresh"></span></button> 
+        </div>
+    </div>
+
+</div>
+<script>
+    function passwordBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/Password");
+    };
+    function sospasswordBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/SosPassword");
+    };
+    function personalDetailBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/PersonalDetail");
+    };
+    function subjectBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/Subject");
+    };
+    function courseBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/Course");
+    };
+    function emergencyBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/EmergencyContact");
+    };
+    function refreshBtn() {
+        $.ajax({
+            url: "Content/RefreshTableContent",
+            dataType: 'html',
+            type: 'POST',
+            success: function (data) {
+                $(".body-content").html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    }
+    $('#siteDropDown').on('change', function () {
+
+        var selected = $('#siteDropDown').val();
+
+        $.ajax({
+            url: "Content/Content",
+            dataType: 'html',
+            type: 'POST',
+            data: selected,
+            success: function (data) {
+                $(".body-content").html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    });
+</script>
+

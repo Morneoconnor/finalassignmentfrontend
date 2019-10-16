@@ -1,0 +1,117 @@
+﻿<div class="wrapper">
+    <div>
+        <h5 id="welcome__display">
+            Manage Your Personal Information
+        </h5>
+    </div>
+    <div id="formContent">
+        <form>
+            <input type="text" id="name" class="fadeIn second" name="login" placeholder="name">
+            <input type="text" id="lastname" class="fadeIn second" name="login" placeholder="last name">
+            <input type="text" id="email" class="fadeIn second" name="login" placeholder="email">
+            <input type="text" id="mobile" class="fadeIn second" name="login" placeholder="mobile number">
+        </form>
+        <div id="formFooter">
+            <div id="formFooter">
+                <input type="button" onclick="createBtn()" value="Create" />
+                <input type="button" onclick="updateBtn()" value="Update" />
+                <input type="button" onclick="deleteBtn()" value="Delete" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function createBtn() {
+        var isSelected = $('#isAdmin').is(':checked');
+        alert(isSelected);
+        var details = {
+            Username: $('#userLogin').val(),
+            Password: $('#password').val(),
+            CRUD: 1,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(data)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+    function updateBtn() {
+        var isSelected = $('#isAdmin').is(':checked');
+        alert(isSelected);
+        var details = {
+            Username: $('#userLogin').val(),
+            Password: $('#password').val(),
+            CRUD: 2,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(data)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+    function deleteBtn() {
+        var isSelected = $('#isAdmin').is(':checked');
+        alert(isSelected);
+        var details = {
+            Username: $('#userLogin').val(),
+            Password: $('#password').val(),
+            CRUD: 3,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(data)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+</script>

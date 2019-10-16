@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="wrapper">
+    <div>
+        <h2 id="welcome__display">
+            Welcome
+        </h2>
+    </div>
+    <div id="formContent">
+
+        <div class="fadeIn first">
+            <img src="~/images/login-shield.png" id="icon" alt="User Icon" /><br />
+            <input type="radio" id="isAdmin" class="fadeIn first" value="false" /><span class="fadeIn second">Check if Admin</span><br>
+        </div>     
+        <form>       
+            <input type="text" id="userLogin" class="fadeIn second" name="login" placeholder="login"><br />
+            <input type="password" id="password" class="fadeIn second" name="login" placeholder="password"><br />
+            <input type="button" onclick="loginFunction()" id="login__btn" class="fadeIn fourth" value="Log In" />
+        </form>
+        <div id="formFooter">
+            <input type="button" onclick="forgotPassword()" value="Forgot Password?" />
+        </div>
+    </div>
+</div>
+<script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+    function loginFunction() {
+        var isSelected = $('#isAdmin').is(':checked');
+        var details = {
+            Username : $('#userLogin').val(),
+            Password: $('#password').val(),
+            IsAdmin: isSelected
+        };
+        $.ajax({
+            url: "Home/Login",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data.password != "")
+                {
+                    console.log(data);
+                    $('#login__btn').removeClass('.fadeIn');
+                    DisplayContent(details)
+                }
+                else {
+                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page','Error');
+            }
+        });
+    };
+    function forgotPassword() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Home/ForgotPassword");
+
+
+    };
+    function DisplayContent(result) {
+        $.ajax({
+            url: "Content/Index",
+            dataType: 'html',
+            type: 'POST',
+            data: result,
+            success: function (data) {
+                console.log(data);
+                toastr.success("Login successful", "Login");
+                //$(".sidenav").add();
+                $(".body-content").html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    }
+</script>

@@ -1,0 +1,110 @@
+﻿@model CPUTUserManager.Models.CourseViewModel
+
+<div class="wrapper">
+    <div>
+        <h5 id="welcome__display">
+            Manage Your Course
+        </h5>
+    </div>
+    <div id="formContent">
+        <form>
+            <input type="text" id="course" class="fadeIn second" name="course" value ="@Model.Course" placeholder="add/ update/ delete course">
+        </form>
+        <div id="formFooter">
+            <div id="formFooter">
+                <input type="button" onclick="createBtn()" value="Create" />
+                <input type="button" onclick="updateBtn()" value="Update" />
+                <input type="button" onclick="deleteBtn()" value="Delete" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function createBtn() {
+        var isAdmin= '@Model.IsAdmin';
+       var details = {
+            UserName: $('#username').val(),
+            Course: $('#course').val(),
+            CRUD: 1,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/Course",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    toast.success("Executed succcessfull", "Success");
+                }
+                else {
+                    toastr.error('Error occurred try again', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+    function updateBtn() {
+         var isAdmin= '@Model.IsAdmin';
+       var details = {
+            UserName: $('#username').val(),
+            Course: $('#course').val(),
+            CRUD: 2,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/Course",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    toast.success("Executed succcessfull", "Success");
+                }
+                else {
+                    toastr.error('Error occurred try again', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+    function deleteBtn() {
+       var isAdmin= '@Model.IsAdmin';
+       var details = {
+            UserName: $('#username').val(),
+            Course: $('#course').val(),
+            CRUD: 3,
+            IsAdmin: isSelected
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/Course",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                if (data != null || data != undefined || data.IsSuccess != false) {
+                    toast.success("Executed succcessfull", "Success");
+                }
+                else {
+                    toastr.error('Error occurred try again', 'Unsuccessful');
+
+                };
+            },
+            error: function () {
+
+                toastr.error('Error Has occurred please refresh your page', 'Error');
+            }
+        });
+    };
+</script>

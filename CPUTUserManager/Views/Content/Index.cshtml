@@ -1,0 +1,147 @@
+﻿@model CPUTUserManager.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Content";
+}
+
+<div class="wrapper">
+    <div style="display:block; width:auto">
+        <div style="visibility:hidden">
+            <input id="_userName" value="@Model.Username">
+            <input id="_passWord" value="@Model.Password">
+            <input id="_isAdmin" value="@Model.IsAdmin">
+        </div>
+        <h2 id="welcome__display">Manager Your Account @Model.Username</h2><br /><br/></br/>
+        <div style="float:left;">
+            <button class="btn-primary" style="background-color:#808080" id="password_btn" onclick="passwordBtn()">User Password<span class="glyphicon glyphicon-blackboard"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="sospassword_btn" onclick="sospasswordBtn()">SOS Password<span class="glyphicon glyphicon-pencil"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="personal_btn" onclick="personalDetailBtn()">Personal Details<span class="glyphicon glyphicon-phone-alt"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="subjects_btn" onclick="subjectBtn()">Subjects<span class="glyphicon glyphicon-book"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="course_btn" onclick="courseBtn()">Course<span class="glyphicon glyphicon-tent"></span></button>
+            <button class="btn-primary" style="background-color:#808080" id="emergency_btn" onclick="emergencyBtn()">Emergency Contact<span class="glyphicon glyphicon-alert"></span></button>
+        </div>
+    </div>
+
+</div>
+<script>
+    function passwordBtn() {
+        var isAdmin = '@Model.IsAdmin';
+
+        var details = {
+            Username: $('#_userName').val(),
+            Password: $('#_passWord').val(),
+            IsAdmin: isAdmin,
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/Password",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                console.log(data);
+                $(".body-content").addClass("backGround");
+                $('#partial__View').html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    };
+    function sospasswordBtn() {
+        var isAdmin = '@Model.IsAdmin';
+
+        var details = {
+            Username: $('#_userName').val(),
+            Password: $('#_passWord').val(),
+            IsAdmin: isAdmin,
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/SosPassword",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                console.log(data);
+                $(".body-content").addClass("backGround");
+                $('#partial__View').html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    };
+    function personalDetailBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/PersonalDetail");
+    };
+    function subjectBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/Subject");
+    };
+    function courseBtn() {
+ var isAdmin = '@Model.IsAdmin';
+
+        var details = {
+            Username: $('#_userName').val(),
+            Password: $('#_passWord').val(),
+            IsAdmin: isAdmin,
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/Course",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                console.log(data);
+                $(".body-content").addClass("backGround");
+                $('#partial__View').html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    };
+    function emergencyBtn() {
+        $(".body-content").addClass("backGround");
+        $("#partial__View").load("Content/EmergencyContact");
+    };
+    function refreshBtn() {
+        $.ajax({
+            url: "Content/RefreshTableContent",
+            dataType: 'html',
+            type: 'POST',
+            success: function (data) {
+                $(".body-content").html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    }
+    $('#siteDropDown').on('change', function () {
+
+        var selected = $('#siteDropDown').val();
+
+        $.ajax({
+            url: "Content/Content",
+            dataType: 'html',
+            type: 'POST',
+            data: selected,
+            success: function (data) {
+                $(".body-content").html(data);
+            },
+            error: function () {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
+    });
+</script>
+
