@@ -81,6 +81,7 @@ namespace CPUTUserManager.Controllers
             return View(result);
         }
 
+
         [HttpPost]
         public IActionResult Course(LoginViewModel model)
         {
