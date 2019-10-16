@@ -79,11 +79,31 @@
         $("#partial__View").load("Content/PersonalDetail");
     };
     function subjectBtn() {
-        $(".body-content").addClass("backGround");
-        $("#partial__View").load("Content/Subject");
+       var isAdmin = '@Model.IsAdmin';
+
+        var details = {
+            Username: $('#_userName').val(),
+            Password: $('#_passWord').val(),
+            IsAdmin: isAdmin,
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/Subject",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                $(".body-content").addClass("backGround");
+                $('#partial__View').html(data);
+            },
+            error: function (ex) {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
     };
     function courseBtn() {
- var isAdmin = '@Model.IsAdmin';
+        var isAdmin = '@Model.IsAdmin';
 
         var details = {
             Username: $('#_userName').val(),
@@ -97,19 +117,38 @@
             type: 'POST',
             data: details,
             success: function (data) {
-                console.log(data);
                 $(".body-content").addClass("backGround");
                 $('#partial__View').html(data);
             },
-            error: function () {
+            error: function (ex) {
 
                 alert("Error Has occurred please refresh your page");
             }
         });
     };
     function emergencyBtn() {
-        $(".body-content").addClass("backGround");
-        $("#partial__View").load("Content/EmergencyContact");
+        var isAdmin = '@Model.IsAdmin';
+
+        var details = {
+            Username: $('#_userName').val(),
+            Password: $('#_passWord').val(),
+            IsAdmin: isAdmin,
+        };
+        console.log(details);
+        $.ajax({
+            url: "Content/EmergencyContact",
+            dataType: 'html',
+            type: 'POST',
+            data: details,
+            success: function (data) {
+                $(".body-content").addClass("backGround");
+                $('#partial__View').html(data);
+            },
+            error: function (ex) {
+
+                alert("Error Has occurred please refresh your page");
+            }
+        });
     };
     function refreshBtn() {
         $.ajax({

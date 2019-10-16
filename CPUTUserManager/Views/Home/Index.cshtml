@@ -15,7 +15,7 @@
             <input type="radio" id="isAdmin" class="fadeIn first" value="false" /><span class="fadeIn second">Check if Admin</span><br>
         </div>     
         <form>       
-            <input type="text" id="userLogin" class="fadeIn second" name="login" placeholder="login"><br />
+            <input type="text" id="userLogin" class="fadeIn second" name="login" placeholder="login"><br>
             <input type="password" id="password" class="fadeIn second" name="login" placeholder="password"><br />
             <input type="button" onclick="loginFunction()" id="login__btn" class="fadeIn fourth" value="Log In" />
         </form>
@@ -43,34 +43,44 @@
         "hideMethod": "fadeOut"
     };
     function loginFunction() {
-        var isSelected = $('#isAdmin').is(':checked');
-        var details = {
-            Username : $('#userLogin').val(),
-            Password: $('#password').val(),
-            IsAdmin: isSelected
-        };
-        $.ajax({
-            url: "Home/Login",
-            dataType: 'html',
-            type: 'POST',
-            data: details,
-            success: function (data) {
-                if (data.password != "")
-                {
-                    console.log(data);
-                    $('#login__btn').removeClass('.fadeIn');
-                    DisplayContent(details)
+        var _userName = $('#userLogin').val();
+        var _passWord = $('#password').val();
+        if (_userName != "" && _passWord != "")
+        {
+
+            var isSelected = $('#isAdmin').is(':checked');
+            var details = {
+                Username: $('#userLogin').val(),
+                Password: $('#password').val(),
+                IsAdmin: isSelected
+            };
+            $.ajax({
+                url: "Home/Login",
+                dataType: 'html',
+                type: 'POST',
+                data: details,
+                success: function (data) {
+                    if (data.password != "") {
+                        console.log(data);
+                        $('#login__btn').removeClass('.fadeIn');
+                        DisplayContent(details)
+                    }
+                    else {
+                        toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+
+                    };
+                },
+                error: function (ex) {
+
+                    toastr.error('Error Has occurred please refresh your page', 'Error');
                 }
-                else {
-                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+            });
+        }
+        else {
 
-                };
-            },
-            error: function () {
-
-                toastr.error('Error Has occurred please refresh your page','Error');
-            }
-        });
+            toastr.error('Error :Null Refernece Excception - Check details', 'Error');
+        }
+      
     };
     function forgotPassword() {
         $(".body-content").addClass("backGround");

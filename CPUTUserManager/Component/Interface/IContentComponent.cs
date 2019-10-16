@@ -16,10 +16,10 @@ namespace CPUTUserManager.Component.Interface
         bool SosPasswordAction(SosPasswordViewModel model);
         PersonalDetailViewModel ReadPersonalDetail(LoginViewModel model);
         RestModel PersonalDetailAction(PersonalDetailViewModel model);
-        SubjectModel ReadSubject(SubjectViewModel model);
-        RestModel SubjectAction(SubjectViewModel model);
-        EmergencyContactModel ReadEmergencyContact(EmergencyContactViewModel model);
-        RestModel EmergencyContactAction(EmergencyContactViewModel model);
+        SubjectViewModel ReadSubject(LoginViewModel model);
+        bool SubjectAction(SubjectViewModel model);
+        EmergencyContactViewModel ReadEmergencyContact(LoginViewModel model);
+        bool EmergencyContactAction(EmergencyContactViewModel model);
 
     }
 }

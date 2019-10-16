@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CPUTUserManager.Models;
 using CPUTUserManager.Component.Interface;
+using Microsoft.Extensions.Logging;
 
 namespace CPUTUserManager.Controllers
 {
     public class ContentController : Controller
     {
         private readonly IContentComponent _contentComponent;
+       
 
         public ContentController(IContentComponent contentComponent)
         {
@@ -68,9 +70,10 @@ namespace CPUTUserManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult Subject(SubjectViewModel model)
+        public IActionResult Subject(LoginViewModel model)
         {
             var result = _contentComponent.ReadSubject(model);
+            result.IsAdmin = model.IsAdmin;
             return View(result);
         }
 
@@ -78,6 +81,7 @@ namespace CPUTUserManager.Controllers
         public IActionResult SubjectAction(SubjectViewModel model)
         {
             var result = _contentComponent.SubjectAction(model);
+
             return View(result);
         }
 
@@ -85,28 +89,31 @@ namespace CPUTUserManager.Controllers
         public IActionResult Course(LoginViewModel model)
         {
             var result = _contentComponent.ReadCourse(model);
-            return View(model);
+            result.IsAdmin = model.IsAdmin;
+            return View(result);
         }
 
         [HttpPost]
         public IActionResult CourseAction(CourseViewModel model)
         {
             var result = _contentComponent.CourseAction(model);
-            return View(model);
+            return View(result);
 
         }
 
         [HttpPost]
-        public IActionResult EmergenctContact(EmergencyContactViewModel model)
+        public IActionResult EmergencyContact(LoginViewModel model)
         {
             var result = _contentComponent.ReadEmergencyContact(model);
+            result.IsAdmin = model.IsAdmin;
             return View(result);
         }
 
         [HttpPost]
-        public IActionResult EmergenctContactAction(EmergencyContactViewModel model)
+        public IActionResult EmergencyContactAction(EmergencyContactViewModel model)
         {
             var result = _contentComponent.EmergencyContactAction(model);
+            //result.IsAdmin = model.IsAdmin;
             return View(result);
         }
 

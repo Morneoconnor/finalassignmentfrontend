@@ -1,38 +1,41 @@
-﻿<div class="wrapper">
+﻿@model CPUTUserManager.Models.SubjectViewModel;
+
+<div class="wrapper">
     <div>
         <h5 id="welcome__display">
-            Manage Your Subjects
+            Manage Your Course
         </h5>
     </div>
+    <div style="visibility:hidden">
+        <input id="_userName" value="@Model.UserName">
+        <input id="_isAdmin" value="@Model.IsAdmin">
+    </div>
     <div id="formContent">
-
-        <div class="fadeIn first">
-            <img src="~/images/login-shield.png" id="icon" alt="User Icon" /><br />
-            <input type="radio" id="isAdmin" class="fadeIn first" value="false" /><span class="fadeIn second">Check if Admin</span><br>
-        </div>
         <form>
-            <input type="text" id="subject" class="fadeIn second" name="login" placeholder="add/ update/ delete subject">
+            <input type="text" id="subject" class="fadeIn second" name="subject" value="@Model.Subject" placeholder="add/ update/ delete course">
         </form>
         <div id="formFooter">
-            <input type="button" onclick="createBtn()" value="Create" />
-            <input type="button" onclick="updateBtn()" value="Update" />
-            <input type="button" onclick="deleteBtn()" value="Delete" />
+            <div id="formFooter">
+                <input type="button" onclick="createBtn()" value="Create" />
+                <input type="button" onclick="updateBtn()" value="Update" />
+                <input type="button" onclick="deleteBtn()" value="Delete" />
+            </div>
         </div>
     </div>
 </div>
 <script>
     function createBtn() {
-        var isSelected = $('#isAdmin').is(':checked');
-        alert(isSelected);
+        var isAdmin = '@Model.IsAdmin';
+
         var details = {
             Username: $('#userLogin').val(),
-            Password: $('#password').val(),
+            Subject: $('#subject').val(),
             CRUD: 1,
-            IsAdmin: isSelected
+            IsAdmin: isAdmin
         };
         console.log(details);
         $.ajax({
-            url: "Home/Login",
+            url: "Home/SubjectAction",
             dataType: 'html',
             type: 'POST',
             data: details,
@@ -53,17 +56,17 @@
         });
     };
     function updateBtn() {
-        var isSelected = $('#isAdmin').is(':checked');
-        alert(isSelected);
+        var isAdmin = '@Model.IsAdmin';
+       
         var details = {
             Username: $('#userLogin').val(),
-            Password: $('#password').val(),
+            Subject: $('#subject').val(),
             CRUD: 2,
-            IsAdmin: isSelected
+            IsAdmin: isAdmin
         };
         console.log(details);
         $.ajax({
-            url: "Home/Login",
+            url: "Home/SubjectAction",
             dataType: 'html',
             type: 'POST',
             data: details,
@@ -84,17 +87,17 @@
         });
     };
     function deleteBtn() {
-        var isSelected = $('#isAdmin').is(':checked');
-        alert(isSelected);
+        var isAdmin = '@Model.IsAdmin';
+        
         var details = {
             Username: $('#userLogin').val(),
-            Password: $('#password').val(),
+            Subject: $('#subject').val(),
             CRUD: 3,
-            IsAdmin: isSelected
+            IsAdmin: isAdmin
         };
         console.log(details);
         $.ajax({
-            url: "Home/Login",
+            url: "Home/SubjectAction",
             dataType: 'html',
             type: 'POST',
             data: details,
@@ -104,7 +107,7 @@
                     DisplayContent(data)
                 }
                 else {
-                    toastr.error('Please ensure your username and password are correct', 'Unsuccessful');
+                    toastr.error('Please reload', 'Unsuccessful');
 
                 };
             },

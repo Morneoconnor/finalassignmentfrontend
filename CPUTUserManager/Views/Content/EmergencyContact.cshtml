@@ -1,9 +1,10 @@
-﻿@model CPUTUserManager.Models.CourseViewModel;
+﻿
+@model CPUTUserManager.Models.EmergencyContactViewModel;
 
 <div class="wrapper">
     <div>
         <h5 id="welcome__display">
-            Manage Your Course
+            Manage Your Personal Details
         </h5>
     </div>
     <div style="visibility:hidden">
@@ -12,7 +13,8 @@
     </div>
     <div id="formContent">
         <form>
-            <input type="text" id="course" class="fadeIn second" name="course" value ="@Model.Course" placeholder="add/ update/ delete course">
+            <input type="text" id="name" class="fadeIn second" name="name" value="@Model.Name" placeholder="add/ update/ delete course">
+            <input type="text" id="mobile" class="fadeIn second" name="mobile" value="@Model.Mobile" placeholder="add/ update/ delete course">
         </form>
         <div id="formFooter">
             <div id="formFooter">
@@ -28,13 +30,14 @@
         var isAdmin= '@Model.IsAdmin';
        var details = {
             UserName: $('#_userName').val(),
-            Course: $('#course').val(),
+            Name: $('#name').val(),
+            Mobile: $('#mobile').val(),
             CRUD: 1,
             IsAdmin: isAdmin
         };
         console.log(details);
         $.ajax({
-            url: "Content/CourseAction",
+            url: "Content/EmergencyContactAction",
             dataType: 'html',
             type: 'POST',
             data: details,
@@ -63,7 +66,7 @@
         };
         console.log(details);
         $.ajax({
-            url: "Content/CourseAction",
+            url: "Content/EmergencyContactAction",
             dataType: 'html',
             type: 'POST',
             data: details,
@@ -92,7 +95,7 @@
         };
         console.log(details);
         $.ajax({
-            url: "Content/CourseAction",
+            url: "Content/EmergencyContactAction",
             dataType: 'html',
             type: 'POST',
             data: details,
@@ -112,3 +115,5 @@
         });
     };
 </script>
+
+
