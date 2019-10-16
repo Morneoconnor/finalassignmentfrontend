@@ -93,6 +93,7 @@ namespace CPUTUserManager.Controllers
         {
             var result = _contentComponent.CourseAction(model);
             return View(model);
+
         }
 
         [HttpPost]
