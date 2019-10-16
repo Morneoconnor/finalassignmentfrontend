@@ -80,6 +80,7 @@ namespace CPUTUserManager.Controllers
             var result = _contentComponent.SubjectAction(model);
             return View(result);
         }
+
         [HttpPost]
         public IActionResult Course(LoginViewModel model)
         {
