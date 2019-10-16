@@ -100,7 +100,6 @@ namespace CPUTUserManager.Controllers
             return View(result);
 
         }
-
         [HttpPost]
         public IActionResult EmergencyContact(LoginViewModel model)
         {
